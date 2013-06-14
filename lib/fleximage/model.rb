@@ -474,7 +474,7 @@ module Fleximage
           @image_file_temp = file_name.split('/').last
           path = "#{Rails.root}/tmp/fleximage"
           FileUtils.mkdir_p(path)
-          File.open("#{path}/#{@image_file_temp}", 'w') do |f|
+          File.open("#{path}/#{@image_file_temp}", 'wb') do |f|
             file.rewind
             f.write file.read
           end
