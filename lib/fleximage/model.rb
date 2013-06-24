@@ -172,8 +172,12 @@ module Fleximage
         raise 'No image directory was defined, cannot generate path' unless self.class.image_directory
         
         # base directory
-        directory = "#{Rails.root}/#{self.class.image_directory}"
-        
+        if self.class.image_directory.start_with? "/"
+		directory = self.class.image_directory
+	else
+        	directory = File.join(Rails.root,self.class.image_directory)
+	end        
+
         # specific creation date based directory suffix.
         creation = self[:created_at] || self[:created_on]
         if self.class.use_creation_date_based_directories && creation 
