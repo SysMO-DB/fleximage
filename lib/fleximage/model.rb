@@ -293,7 +293,7 @@ module Fleximage
           file_path = "#{Rails.root}/tmp/fleximage/#{file_name}"
           
           @dont_save_temp = true
-          if File.exists?(file_path)
+          if File.exist?(file_path)
             File.open(file_path, 'rb') do |f|
               self.image_file = f
             end
@@ -314,7 +314,7 @@ module Fleximage
       end
       
       def has_saved_image?
-        self.class.db_store? ? !!image_file_data : File.exists?(file_path)
+        self.class.db_store? ? !!image_file_data : File.exist?(file_path)
       end
       
       # Call from a .flexi view template.  This enables the rendering of operators 
@@ -391,7 +391,7 @@ module Fleximage
         if self.class.db_store?
           update_attribute :image_file_data, nil unless frozen?
         else
-          File.delete(file_path) if File.exists?(file_path)
+          File.delete(file_path) if File.exist?(file_path)
         end
         
         clear_magic_attributes

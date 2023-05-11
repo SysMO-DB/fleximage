@@ -39,7 +39,7 @@ namespace :fleximage do
         end
         
         # Move the files
-        if old_path != new_path && File.exists?(old_path)
+        if old_path != new_path && File.exist?(old_path)
           FileUtils.mkdir_p(File.dirname(new_path))
           FileUtils.move old_path, new_path
           puts "#{old_path} -> #{new_path}"
@@ -82,7 +82,7 @@ namespace :fleximage do
           end
         
           # Perform conversion
-          if File.exists?(old_path)
+          if File.exist?(old_path)
             image = Magick::Image.read(old_path).first
             image.format = to_format.to_s.upcase
             image.write(new_path)
@@ -125,7 +125,7 @@ namespace :fleximage do
     task :to_db => :environment do
       ensure_db_store
       model_class.find(:all).each do |obj|
-        if File.exists?(obj.file_path)
+        if File.exist?(obj.file_path)
           File.open(obj.file_path, 'rb') do |f|
             obj.image_file_data = f.read
             obj.save

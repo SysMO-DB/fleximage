@@ -5,11 +5,11 @@ class FleximageTempImageTest < Test::Unit::TestCase
     a1 = Avatar.new(:image_file => files(:photo))
     assert ! a1.save
     assert_equal 'photo.jpg', a1.image_file_temp
-    assert File.exists?("#{RAILS_ROOT}/tmp/fleximage/#{a1.image_file_temp}")
+    assert File.exist?("#{RAILS_ROOT}/tmp/fleximage/#{a1.image_file_temp}")
     
     a2 = Avatar.new(:username => 'Alex Wayne', :image_file_temp => 'photo.jpg')
     assert a2.save
-    assert File.exists?(a2.file_path)
-    assert ! File.exists?("#{RAILS_ROOT}/tmp/fleximage/#{a2.image_file_temp}")
+    assert File.exist?(a2.file_path)
+    assert ! File.exist?("#{RAILS_ROOT}/tmp/fleximage/#{a2.image_file_temp}")
   end
 end
